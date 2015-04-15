@@ -31,32 +31,26 @@
 
 // TSNPeerBluetoothDelegate protocol.
 @protocol TSNPeerBluetoothDelegate <NSObject>
-@optional
-
-// Notifies the delegate that a log message was written.
-- (void)peerBluetoothContext:(TSNPeerBluetooth *)peerBluetoothContext
-               didLogMessage:(NSString *)message;
-
 @required
 
 // Notifies the delegate that a peer was connected.
-- (void)peerBluetoothContext:(TSNPeerBluetooth *)peerBluetoothContext
-    didConnectPeerIdentifier:(NSUUID *)peerIdentifier
-                    peerName:(NSString *)peerName
-                peerLocation:(CLLocation *)peerLocation;
+- (void)peerBluetooth:(TSNPeerBluetooth *)peerBluetooth
+didConnectPeerIdentifier:(NSUUID *)peerIdentifier
+             peerName:(NSString *)peerName
+         peerLocation:(CLLocation *)peerLocation;
 
 // Notifies the delegate that a peer was disconnected.
-- (void)peerBluetoothContext:(TSNPeerBluetooth *)peerBluetoothContext
- didDisconnectPeerIdentifier:(NSUUID *)peerIdentifier;
+- (void)peerBluetooth:(TSNPeerBluetooth *)peerBluetooth
+didDisconnectPeerIdentifier:(NSUUID *)peerIdentifier;
 
 // Notifies the delegate that a peer location was received.
-- (void)peerBluetoothContext:(TSNPeerBluetooth *)peerBluetoothContext
-      didReceivePeerLocation:(CLLocation *)peerLocation
-          fromPeerIdentifier:(NSUUID *)peerIdentifier;
+- (void)peerBluetooth:(TSNPeerBluetooth *)peerBluetooth
+didReceivePeerLocation:(CLLocation *)peerLocation
+   fromPeerIdentifier:(NSUUID *)peerIdentifier;
 
 // Notifies the delegate that a peer status was received.
-- (void)peerBluetoothContext:(TSNPeerBluetooth *)peerBluetoothContext
-        didReceivePeerStatus:(NSString *)peerStatus
-          fromPeerIdentifier:(NSUUID *)peerIdentifier;
+- (void)peerBluetooth:(TSNPeerBluetooth *)peerBluetooth
+ didReceivePeerStatus:(NSString *)peerStatus
+   fromPeerIdentifier:(NSUUID *)peerIdentifier;
 
 @end
