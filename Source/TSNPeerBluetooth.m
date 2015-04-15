@@ -645,10 +645,10 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         // Notify the delegate that the peer is connected.
         if ([[self delegate] respondsToSelector:@selector(peerBluetooth:didConnectPeerIdentifier:peerName:peerLocation:)])
         {
-            [[self delegate] peerBluetoothContext:self
-                         didConnectPeerIdentifier:[peerDescriptor peerID]
-                                         peerName:[peerDescriptor peerName]
-                                     peerLocation:[peerDescriptor peerLocation]];
+            [[self delegate] peerBluetooth:self
+                  didConnectPeerIdentifier:[peerDescriptor peerID]
+                                  peerName:[peerDescriptor peerName]
+                              peerLocation:[peerDescriptor peerLocation]];
         }
     }
 }
