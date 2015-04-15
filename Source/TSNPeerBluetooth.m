@@ -311,7 +311,7 @@ typedef NS_ENUM(NSUInteger, TSNPeerDescriptorState)
     }
 }
 
-// Starts the peer Bluetooth context.
+// Starts peer Bluetooth.
 - (void)start
 {
     if (!_enabled)
@@ -322,7 +322,7 @@ typedef NS_ENUM(NSUInteger, TSNPeerDescriptorState)
     }
 }
 
-// Stops the peer Bluetooth context.
+// Stops peer Bluetooth.
 - (void)stop
 {
     if (_enabled)
@@ -506,10 +506,10 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
         // Notify the delegate.
         if ([peerDescriptor peerName])
         {
-            if ([[self delegate] respondsToSelector:@selector(peerBluetoothContext:didDisconnectPeerIdentifier:)])
+            if ([[self delegate] respondsToSelector:@selector(peerBluetooth:didDisconnectPeerIdentifier:)])
             {
-                [[self delegate] peerBluetoothContext:self
-                          didDisconnectPeerIdentifier:[peerDescriptor peerID]];
+                [[self delegate] peerBluetooth:self
+                   didDisconnectPeerIdentifier:[peerDescriptor peerID]];
             }
         }
         
@@ -614,11 +614,11 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
             [peerDescriptor setPeerLocation:[[CLLocation alloc] initWithLatitude:*latitude
                                                                        longitude:*longitude]];
             
-            if ([peerDescriptor state] == TSNPeerDescriptorStateConnected && [[self delegate] respondsToSelector:@selector(peerBluetoothContext:didReceivePeerLocation:fromPeerIdentifier:)])
+            if ([peerDescriptor state] == TSNPeerDescriptorStateConnected && [[self delegate] respondsToSelector:@selector(peerBluetooth:didReceivePeerLocation:fromPeerIdentifier:)])
             {
-                [[self delegate] peerBluetoothContext:self
-                               didReceivePeerLocation:[peerDescriptor peerLocation]
-                                   fromPeerIdentifier:[peerDescriptor peerID]];
+                [[self delegate] peerBluetooth:self
+                        didReceivePeerLocation:[peerDescriptor peerLocation]
+                            fromPeerIdentifier:[peerDescriptor peerID]];
             }
         }
     }
@@ -626,12 +626,12 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
     {
         if ([[characteristic value] length])
         {
-            if ([peerDescriptor state] == TSNPeerDescriptorStateConnected && [[self delegate] respondsToSelector:@selector(peerBluetoothContext:didReceivePeerStatus:fromPeerIdentifier:)])
+            if ([peerDescriptor state] == TSNPeerDescriptorStateConnected && [[self delegate] respondsToSelector:@selector(peerBluetooth:didReceivePeerStatus:fromPeerIdentifier:)])
             {
-                [[self delegate] peerBluetoothContext:self
-                                 didReceivePeerStatus:[[NSString alloc] initWithData:[characteristic value]
-                                                                            encoding:NSUTF8StringEncoding]
-                                   fromPeerIdentifier:[peerDescriptor peerID]];
+                [[self delegate] peerBluetooth:self
+                          didReceivePeerStatus:[[NSString alloc] initWithData:[characteristic value]
+                                                                     encoding:NSUTF8StringEncoding]
+                            fromPeerIdentifier:[peerDescriptor peerID]];
             }
         }
     }
@@ -643,7 +643,7 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         [peerDescriptor setState:TSNPeerDescriptorStateConnected];
 
         // Notify the delegate that the peer is connected.
-        if ([[self delegate] respondsToSelector:@selector(peerBluetoothContext:didConnectPeerIdentifier:peerName:peerLocation:)])
+        if ([[self delegate] respondsToSelector:@selector(peerBluetooth:didConnectPeerIdentifier:peerName:peerLocation:)])
         {
             [[self delegate] peerBluetoothContext:self
                          didConnectPeerIdentifier:[peerDescriptor peerID]

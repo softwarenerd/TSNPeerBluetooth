@@ -41,10 +41,10 @@
                      peerIdentifier:(NSUUID *)peerIdentifier
                            peerName:(NSString *)peerName;
 
-// Starts the peer Bluetooth context.
+// Starts peer Bluetooth.
 - (void)start;
 
-// Stops the peer Bluetooth context.
+// Stops peer Bluetooth.
 - (void)stop;
 
 // Updates the location.
