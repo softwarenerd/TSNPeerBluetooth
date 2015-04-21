@@ -171,14 +171,16 @@ typedef NS_ENUM(NSUInteger, TSNPeerDescriptorState)
 // Stops scanning.
 - (void)stopScanning;
 
-// Updates the peer name characteristic.
-- (void)updatePeerNameCharacteristic;
-
 // Updates the peer location characteristic.
 - (void)updatePeerLocationCharacteristic:(CLLocation *)peerLocation;
 
 // Updates the peer status characteristic.
 - (BOOL)updatePeerStatusCharacteristic:(NSString *)peerStatus;
+
+// Updates the value of a characteristic. Automatically handles the case when the transmit queue
+// is full by enqueuing a characteristic update for later transmission.
+- (void)updateValue:(NSData *)value
+  forCharacteristic:(CBMutableCharacteristic *)characteristic;
 
 @end
 
@@ -1176,7 +1178,7 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
 
     // Peer status 1-5 are updated in a round-robin pattern which prevents a fast sender
     // from overwriting a status that is still being read.
-    CBCharacteristic * characteristicPeerStatus;
+    CBMutableCharacteristic * characteristicPeerStatus;
     switch (_peerStatusIndex)
     {
         case 0:
