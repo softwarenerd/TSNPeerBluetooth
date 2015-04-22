@@ -1,9 +1,10 @@
 TSNPeerBluetooth
 ================
-Bluetooth LE peer-to-peer presence, location, and status library for iOS.
-Why TSNPeerBluetooth
---------------------
+TSNPeerBluetooth is a Bluetooth LE peer-to-peer networking library for iOS. 
 
+I created TSNPeerBluetooth to serve as an example of how to use Apple's Core Bluetooth framework to define a custom Bluetooth LE service that allows nearby peers to exchange presence, location, and status updates.
+
+I also created an example application that uses TSNPeerBluetooth called [Bubble Chat](https://github.com/softwarenerd/BubbleChat). Bubble Chat allows iOS devices that are within Bluetooth LE communications range to see one another on a map and exchange chat messages.
 
 Using TSNPeerBluetooth
 ----------------------
@@ -68,9 +69,7 @@ To update your peer's status, call the updateStatus method:
 ```
 [_peerBluetooth updateStatus:@"My new status!"];
 ```
-Implement the TSNPeerBluetoothDelegate to receive callbacks for peer Bluetooth events.
-
-
+Implement the TSNPeerBluetoothDelegate to receive callbacks for TSNPeerBluetooth events. (See Bubble Chat for an example of how to implement TSNPeerBluetoothDelegate.)
 
 License
 -------
