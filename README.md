@@ -69,7 +69,29 @@ To update your peer's status, call the updateStatus method:
 ```
 [_peerBluetooth updateStatus:@"My new status!"];
 ```
-Implement the TSNPeerBluetoothDelegate to receive callbacks for TSNPeerBluetooth events. (See [Bubble Chat](https://github.com/softwarenerd/BubbleChat/blob/master/BubbleChat/Code/AppContext/TSNAppContext.m) for an example of how to implement TSNPeerBluetoothDelegate.)
+Implement the TSNPeerBluetoothDelegate to receive callbacks for TSNPeerBluetooth events.
+
+peerBluetooth:didConnectPeerIdentifier:peerName:peerLocation: is called when a new peer is discovered and connected:
+```
+// Notifies the delegate that a peer was connected.
+- (void)peerBluetooth:(TSNPeerBluetooth *)peerBluetooth
+didConnectPeerIdentifier:(NSUUID *)peerIdentifier
+             peerName:(NSString *)peerName
+         peerLocation:(CLLocation *)peerLocation
+{
+...
+}
+```
+peerBluetooth:didDisconnectPeerIdentifier: is called when a previously connected peer is disconnected:
+
+
+
+peerBluetooth:didReceivePeerLocation:fromPeerIdentifier:
+
+peerBluetooth:didReceivePeerStatus:fromPeerIdentifier:
+
+
+(See [Bubble Chat's TSNAppContext.m file](https://github.com/softwarenerd/BubbleChat/blob/master/BubbleChat/Code/AppContext/TSNAppContext.m) for an example of how to implement TSNPeerBluetoothDelegate.)
 
 License
 -------
