@@ -17,7 +17,7 @@ How TSNPeerBluetooth Works
 Allocate and initialize a new instance of the TSNPeerBluetooth class as shown below.
 ```
 // Allocate and initialize the service type.
-NSUUID * serviceType = [[NSUUID alloc] initWithUUIDString:@"B206EE5D-17EE-40C1-92BA-462A038A33D2"];
+NSUUID * serviceType = [[NSUUID alloc] initWithUUIDString:@"FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"];
 
 // Static declarations.
 static NSString * const PEER_IDENTIFIER_KEY = @"PeerIdentifierKey";
@@ -47,22 +47,13 @@ _peerBluetooth = [[TSNPeerBluetooth alloc] initWithServiceType:serviceType
                                                       peerName:[[UIDevice currentDevice] name]];
 [_peerBluetooth setDelegate:(id<TSNPeerBluetoothDelegate>)self];
 ```
+Use your own UUID in place of FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF.
 
-
-Use your own UUID in place of FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF below.
-
-```
-NSUUID * serviceType = [[NSUUID alloc] initWithUUIDString:@"FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"];
-_peerBluetooth = [[TSNPeerBluetooth alloc] initWithServiceType:serviceType
-                                                peerIdentifier:peerIdentifier
-                                                      peerName:[[UIDevice currentDevice] name]];
-[_peerBluetooth setDelegate:(id<TSNPeerBluetoothDelegate>)self];
-```
 Once you have a TSNPeerBluetooth instance, use the start method to start your peer:
 ```
 [_peerBluetooth start];
 ```
-And the stop method to stop it:
+And the stop method to stop your peer:
 ```
 [_peerBluetooth stop];
 ```
