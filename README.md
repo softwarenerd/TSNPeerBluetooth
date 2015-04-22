@@ -1,6 +1,9 @@
 TSNPeerBluetooth
 ================
-Bluetooth LE peer-to-peer library for iOS.
+Bluetooth LE peer-to-peer presence, location, and status library for iOS.
+Why TSNPeerBluetooth
+--------------------
+
 
 Using TSNPeerBluetooth
 ----------------------
@@ -65,7 +68,7 @@ To update your peer's status, call the updateStatus method:
 ```
 [_peerBluetooth updateStatus:@"My new status!"];
 ```
-
+Implement the TSNPeerBluetoothDelegate to receive callbacks for peer Bluetooth events.
 
 
 
