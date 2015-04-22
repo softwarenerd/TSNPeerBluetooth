@@ -9,7 +9,7 @@ In order to make TSNPeerBluetooth a more useful example, I created an example ap
 
 I've written a [blog posting](http://www.softwarenerd.org/code/2015/4/16/bubble-chat-and-tsnpeerbluetooth-cocoapod) about BubbleChat and TSNPeerBluetooth which includes a video that shows BubbleChat in action.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/WRQ7xHVtwNE" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WRQ7xHVtwNE" frameborder="1" allowfullscreen></iframe>
 
 ----------------------
 Add TSNPeerBluetooth to your podfile.
