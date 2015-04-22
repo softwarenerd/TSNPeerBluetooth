@@ -16,36 +16,36 @@ How TSNPeerBluetooth Works
 --------------------------
 Allocate and initialize a new instance of the TSNPeerBluetooth class as shown below.
 ```
-    // Allocate and initialize the service type.
-    NSUUID * serviceType = [[NSUUID alloc] initWithUUIDString:@"B206EE5D-17EE-40C1-92BA-462A038A33D2"];
+// Allocate and initialize the service type.
+NSUUID * serviceType = [[NSUUID alloc] initWithUUIDString:@"B206EE5D-17EE-40C1-92BA-462A038A33D2"];
+
+// Static declarations.
+static NSString * const PEER_IDENTIFIER_KEY = @"PeerIdentifierKey";
     
-    // Static declarations.
-    static NSString * const PEER_IDENTIFIER_KEY = @"PeerIdentifierKey";
-        
-    // Obtain user defaults and see if we have a serialized peer identifier. If we do,
-    // deserialize it. If not, make one and serialize it for later use.
-    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
-    NSData * peerIdentifierData = [userDefaults dataForKey:PEER_IDENTIFIER_KEY];
-    if (!peerIdentifierData)
-    {
-        // Create a new peer identifier.
-        UInt8 uuid[16];
-        [[NSUUID UUID] getUUIDBytes:uuid];
-        peerIdentifierData = [NSData dataWithBytes:uuid
-                                            length:sizeof(uuid)];
-        
-        // Save the peer identifier in user defaults.
-        [userDefaults setValue:peerIdentifierData
-                        forKey:PEER_IDENTIFIER_KEY];
-        [userDefaults synchronize];
-    }
-    NSUUID * peerIdentifier = [[NSUUID alloc] initWithUUIDBytes:[peerIdentifierData bytes]];
+// Obtain user defaults and see if we have a serialized peer identifier. If we do,
+// deserialize it. If not, make one and serialize it for later use.
+NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+NSData * peerIdentifierData = [userDefaults dataForKey:PEER_IDENTIFIER_KEY];
+if (!peerIdentifierData)
+{
+    // Create a new peer identifier.
+    UInt8 uuid[16];
+    [[NSUUID UUID] getUUIDBytes:uuid];
+    peerIdentifierData = [NSData dataWithBytes:uuid
+                                        length:sizeof(uuid)];
     
-    // Allocate and initialize the peer Bluetooth context.
-    _peerBluetooth = [[TSNPeerBluetooth alloc] initWithServiceType:serviceType
-                                                    peerIdentifier:peerIdentifier
-                                                          peerName:[[UIDevice currentDevice] name]];
-    [_peerBluetooth setDelegate:(id<TSNPeerBluetoothDelegate>)self];
+    // Save the peer identifier in user defaults.
+    [userDefaults setValue:peerIdentifierData
+                    forKey:PEER_IDENTIFIER_KEY];
+    [userDefaults synchronize];
+}
+NSUUID * peerIdentifier = [[NSUUID alloc] initWithUUIDBytes:[peerIdentifierData bytes]];
+
+// Allocate and initialize the peer Bluetooth context.
+_peerBluetooth = [[TSNPeerBluetooth alloc] initWithServiceType:serviceType
+                                                peerIdentifier:peerIdentifier
+                                                      peerName:[[UIDevice currentDevice] name]];
+[_peerBluetooth setDelegate:(id<TSNPeerBluetoothDelegate>)self];
 ```
 
 
