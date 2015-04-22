@@ -4,8 +4,7 @@ TSNPeerBluetooth is a Bluetooth LE peer-to-peer networking library for iOS.
 
 I created TSNPeerBluetooth to serve as an example of how to use Apple's Core Bluetooth framework to define a custom Bluetooth LE service that allows nearby peers to exchange presence, location, and status updates.
 
-I also created an example application that uses TSNPeerBluetooth called [Bubble Chat](https://github.com/softwarenerd/BubbleChat). Bubble Chat allows iOS devices that are within Bluetooth LE communications range to see one another on a map and exchange chat messages.
-
+In order to make this a more useful example, I created an example application that uses TSNPeerBluetooth called [Bubble Chat](https://github.com/softwarenerd/BubbleChat). Bubble Chat allows iOS devices that are within Bluetooth LE communications range to see one another on a map and exchange chat messages. Clone [Bubble Chat](https://github.com/softwarenerd/BubbleChat) and give it a go!
 Using TSNPeerBluetooth
 ----------------------
 Add TSNPeerBluetooth to your podfile.
@@ -111,7 +110,7 @@ peerBluetooth:didReceivePeerStatus:fromPeerIdentifier: is called when a peer upd
 ...
 }
 ```
-(See [Bubble Chat's TSNAppContext.m file](https://github.com/softwarenerd/BubbleChat/blob/master/BubbleChat/Code/AppContext/TSNAppContext.m) for an example of how to implement TSNPeerBluetoothDelegate.)
+(See [Bubble Chat's TSNAppContext.m file](https://github.com/softwarenerd/BubbleChat/blob/master/BubbleChat/Code/AppContext/TSNAppContext.m) for an example implementation TSNPeerBluetoothDelegate.)
 License
 -------
 TSNPeerBluetooth is released under an MIT license, meaning you're free to use it in both closed and open source projects. However, even in a closed source project, please include a publicly-accessible copy of TSNPeerBluetooth's copyright notice, which you can find in the LICENSE file.
