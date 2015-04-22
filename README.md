@@ -8,6 +8,9 @@ I created TSNPeerBluetooth to serve as an example of how to use Apple's Core Blu
 In order to make TSNPeerBluetooth a more useful example, I created an example application that uses it called [Bubble Chat](https://github.com/softwarenerd/BubbleChat). Bubble Chat allows iOS devices that are within Bluetooth LE communications range to see one another on a map and exchange chat messages. Clone [Bubble Chat](https://github.com/softwarenerd/BubbleChat) and give it a go. Better yet, fork it and send some pull requests.
 
 I've written a [blog posting](http://www.softwarenerd.org/code/2015/4/16/bubble-chat-and-tsnpeerbluetooth-cocoapod) about BubbleChat and TSNPeerBluetooth which includes a video that shows BubbleChat in action.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WRQ7xHVtwNE" frameborder="0" allowfullscreen></iframe>
+
 ----------------------
 Add TSNPeerBluetooth to your podfile.
 ```
