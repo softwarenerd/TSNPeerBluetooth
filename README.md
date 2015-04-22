@@ -111,13 +111,11 @@ peerBluetooth:didReceivePeerStatus:fromPeerIdentifier: is called when a peer upd
 ...
 }
 ```
-
 (See [Bubble Chat's TSNAppContext.m file](https://github.com/softwarenerd/BubbleChat/blob/master/BubbleChat/Code/AppContext/TSNAppContext.m) for an example of how to implement TSNPeerBluetoothDelegate.)
-
 License
 -------
 TSNPeerBluetooth is released under an MIT license, meaning you're free to use it in both closed and open source projects. However, even in a closed source project, please include a publicly-accessible copy of TSNPeerBluetooth's copyright notice, which you can find in the LICENSE file.
 
 Feedback
 --------
-If you have any questions, suggestions, or contributions to TSNPeerBluetooth, please [contact me](mailto:brianlambert@softwarenerd.org).
+If you have any questions, suggestions, or contributions to TSNPeerBluetooth, please feel free to [contact me](mailto:brianlambert@softwarenerd.org).
