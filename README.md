@@ -83,13 +83,34 @@ didConnectPeerIdentifier:(NSUUID *)peerIdentifier
 }
 ```
 peerBluetooth:didDisconnectPeerIdentifier: is called when a previously connected peer is disconnected:
-
-
-
-peerBluetooth:didReceivePeerLocation:fromPeerIdentifier:
-
-peerBluetooth:didReceivePeerStatus:fromPeerIdentifier:
-
+```
+// Notifies the delegate that a peer was disconnected.
+- (void)peerBluetooth:(TSNPeerBluetooth *)peerBluetooth
+didDisconnectPeerIdentifier:(NSUUID *)peerIdentifier
+{
+...
+}
+```
+peerBluetooth:didReceivePeerLocation:fromPeerIdentifier: is called when a peer updates its location:
+```
+// Notifies the delegate that a peer location was received.
+- (void)peerBluetooth:(TSNPeerBluetooth *)peerBluetooth
+didReceivePeerLocation:(CLLocation *)peerLocation
+   fromPeerIdentifier:(NSUUID *)peerIdentifier
+{
+...
+}
+```
+peerBluetooth:didReceivePeerStatus:fromPeerIdentifier: is called when a peer updates its status:
+```
+// Notifies the delegate that a peer status was received.
+- (void)peerBluetooth:(TSNPeerBluetooth *)peerBluetooth
+ didReceivePeerStatus:(NSString *)peerStatus
+   fromPeerIdentifier:(NSUUID *)peerIdentifier
+{
+...
+}
+```
 
 (See [Bubble Chat's TSNAppContext.m file](https://github.com/softwarenerd/BubbleChat/blob/master/BubbleChat/Code/AppContext/TSNAppContext.m) for an example of how to implement TSNPeerBluetoothDelegate.)
 
