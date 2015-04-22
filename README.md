@@ -14,6 +14,67 @@ pod install
 ```
 How TSNPeerBluetooth Works
 --------------------------
+TSNPeerBluetooth requires each peer to uniquely identify itself using a peer identifier. Ideally, this identifier should be reused each time an application based on TSNPeerBluetooth is launched (though this isn't a requrement). Here's one way to do this:
+<div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#007400;">//&nbsp;Obtain&nbsp;user&nbsp;defaults&nbsp;and&nbsp;see&nbsp;if&nbsp;we&nbsp;have&nbsp;a&nbsp;serialized&nbsp;peer&nbsp;identifier.&nbsp;If&nbsp;we&nbsp;do,</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#007400;">//&nbsp;deserialize&nbsp;it.&nbsp;If&nbsp;not,&nbsp;make&nbsp;one&nbsp;and&nbsp;serialize&nbsp;it&nbsp;for&nbsp;later&nbsp;use.</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#5c2699;">NSUserDefaults</span><span style="color:#000000;">&nbsp;*&nbsp;userDefaults&nbsp;=&nbsp;[</span><span style="color:#5c2699;">NSUserDefaults</span><span style="color:#000000;">&nbsp;</span><span style="color:#2e0d6e;">standardUserDefaults</span><span style="color:#000000;">];</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#5c2699;">NSData</span><span style="color:#000000;">&nbsp;*&nbsp;peerIdentifierData&nbsp;=&nbsp;[userDefaults&nbsp;</span><span style="color:#2e0d6e;">dataForKey</span><span style="color:#000000;">:PEER_IDENTIFIER_KEY];</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#aa0d91;">if</span><span style="color:#000000;">&nbsp;(!peerIdentifierData)</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#000000;">{</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#007400;">//&nbsp;Allocate&nbsp;and&nbsp;initialize&nbsp;a&nbsp;new&nbsp;peer&nbsp;ID.</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#5c2699;">UInt8</span><span style="color:#000000;">&nbsp;uuid[</span><span style="color:#1c00cf;">16</span><span style="color:#000000;">];</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;[[</span><span style="color:#5c2699;">NSUUID</span><span style="color:#000000;">&nbsp;</span><span style="color:#2e0d6e;">UUID</span><span style="color:#000000;">]&nbsp;</span><span style="color:#2e0d6e;">getUUIDBytes</span><span style="color:#000000;">:uuid];</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;peerIdentifierData&nbsp;=&nbsp;[</span><span style="color:#5c2699;">NSData</span><span style="color:#000000;">&nbsp;</span><span style="color:#2e0d6e;">dataWithBytes</span><span style="color:#000000;">:uuid</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#2e0d6e;">length</span><span style="color:#000000;">:</span><span style="color:#aa0d91;">sizeof</span><span style="color:#000000;">(uuid)];</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#007400;">//&nbsp;Serialize&nbsp;and&nbsp;save&nbsp;the&nbsp;peer&nbsp;ID&nbsp;in&nbsp;user&nbsp;defaults.</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;[userDefaults&nbsp;</span><span style="color:#2e0d6e;">setValue</span><span style="color:#000000;">:peerIdentifierData</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#2e0d6e;">forKey</span><span style="color:#000000;">:PEER_IDENTIFIER_KEY];</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;[userDefaults&nbsp;</span><span style="color:#2e0d6e;">synchronize</span><span style="color:#000000;">];</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#000000;">}</span>
+    </div>
+    <div style="font-family:Menlo,Consolas,monospace;font-size:12px;line-height:14px;">
+        <span style="color:#5c2699;">NSUUID</span><span style="color:#000000;">&nbsp;*&nbsp;peerIdentifier&nbsp;=&nbsp;[[</span><span style="color:#5c2699;">NSUUID</span><span style="color:#000000;">&nbsp;</span><span style="color:#2e0d6e;">alloc</span><span style="color:#000000;">]&nbsp;</span><span style="color:#2e0d6e;">initWithUUIDBytes</span><span style="color:#000000;">:[peerIdentifierData&nbsp;</span><span style="color:#2e0d6e;">bytes</span><span style="color:#000000;">]];</span>
+    </div>
+    <div>
+    </div>
+</div>
+
+
 Allocate and initialize a new instance of the TSNPeerBluetooth class as shown below.
 
 The peer identifier uniquely identifies your local peer to nearby peers. It makes sense to reuse the same peer identifier. To accomplish this, I use the following code.
