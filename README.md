@@ -69,7 +69,7 @@ To update your peer's status, call the updateStatus method:
 ```
 [_peerBluetooth updateStatus:@"My new status!"];
 ```
-Implement the TSNPeerBluetoothDelegate to receive callbacks for TSNPeerBluetooth events. (See Bubble Chat for an example of how to implement TSNPeerBluetoothDelegate.)
+Implement the TSNPeerBluetoothDelegate to receive callbacks for TSNPeerBluetooth events. (See [Bubble Chat](https://github.com/softwarenerd/BubbleChat/blob/master/BubbleChat/Code/AppContext/TSNAppContext.m) for an example of how to implement TSNPeerBluetoothDelegate.)
 
 License
 -------
